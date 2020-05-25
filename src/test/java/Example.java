@@ -36,11 +36,11 @@ public class Example extends BaseTest {
         logger.info("Телефон Xiaomi добавлен к сравнению");
 
     // Проверить, что отобразилась плашка "Товар добавлен к сравнению"
-        new WebDriverWait(driver,70).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class=\"popup-informer__content\"]")));
+        new WebDriverWait(driver,30).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class=\"popup-informer__content\"]")));
         WebElement notificationXiaomi = driver.findElement(By.xpath("//div[@class=\"popup-informer__content\"]"));
         Assert.assertTrue(driver.findElement(By.xpath("//div[@class=\"popup-informer__content\"]")).isDisplayed());
         Assert.assertNotNull(notificationXiaomi);
-        logger.info("Товар Xiaomi добавлен к сравнению");
+        logger.info("Плашка: Товар Xiaomi добавлен к сравнению");
 
     // Добавить в сравнение первый телефон Huawei
         WebElement addHuawei = driver.findElements(By.xpath("//a[contains(@title, 'Huawei')]/../..//div[contains(@data-bem, 'compare')]")).get(0);
@@ -49,19 +49,20 @@ public class Example extends BaseTest {
         logger.info("Телефон Huawei добавлен к сравнению");
 
     // Проверить, что отобразилась плашка "Товар добавлен к сравнению"
-        new WebDriverWait(driver,70).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class=\"popup-informer__content\"]")));
+        new WebDriverWait(driver,30).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class=\"popup-informer__content\"]")));
         WebElement notificationHuawei = driver.findElement(By.xpath("//div[@class=\"popup-informer__content\"]"));
         Assert.assertTrue(driver.findElement(By.xpath("//div[@class=\"popup-informer__content\"]")).isDisplayed());
         Assert.assertNotNull(notificationHuawei);
-        logger.info("Товар Huawei добавлен к сравнению");
+        logger.info("Плашка: Товар Huawei добавлен к сравнению");
 
     // Перейти в раздел Сравнение
-        WebElement compareLink = driver.findElement(By.xpath("//a[contains(@href, 'compare')]"));
+        WebElement compareLink = driver.findElement(By.xpath("//a[contains(@href,'compare?track=rmmbr')]"));
         actions.moveToElement(compareLink).build().perform();
         actions.click(compareLink).build().perform();
         logger.info("Произошел переход на страницу Сравнения");
 
     // Проверить, что в списке 2 позиции, нажать на опцию "Все характеристики"
+        new WebDriverWait(driver,30).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@data-bem, 'n-compare-cell')]")));
         List<WebElement> compareList = driver.findElements(By.xpath("//div[contains(@data-bem, 'n-compare-cell')]"));
         Assert.assertEquals(compareList.size(),2);
         logger.info("В списке 2 телефона");
